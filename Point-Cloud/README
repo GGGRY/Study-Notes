@@ -1,0 +1,5 @@
+This folder includes some sample code for processing cloud point with PCL. 
+The tutorials is from: http://pointclouds.org/documentation/tutorials
+
+ - remove outliers
+ - smoothing
