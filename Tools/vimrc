@@ -1,0 +1,19 @@
+filetype plugin indent on
+" show existing tab with 4 spaces width
+set tabstop=4
+" when indenting with '>', use 4 spaces width
+set shiftwidth=4
+" On pressing tab, insert 4 spaces
+set expandtab
+set showmatch
+set nu
+let mapleader="\<Space>"
+nnoremap <Leader>w :w<CR>
+nmap <Leader><Leader> i
+nmap <Leader>q :q<CR>
+nmap <Leader>s :wq<CR>
+map <Leader>j <c>wj
+map <Leader>k <c>wk
+map <Leader>y "+y
+map <Leader>p "+p
+
