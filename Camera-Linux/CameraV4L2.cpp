@@ -13,24 +13,6 @@
 
 using namespace std;
 
-// static   int      fd;
-// static   struct   v4l2_capability   cap;
-// struct v4l2_fmtdesc fmtdesc;
-// struct v4l2_format fmt,fmtack;
-// struct v4l2_streamparm setfps;  
-// struct v4l2_requestbuffers req;
-// struct v4l2_buffer buf;
-// enum v4l2_buf_type buf_type;
-
-// // unsigned char frame_buffer[IMAGEWIDTH*IMAGEHEIGHT*3];
-// // unsigned char grey_buffer[IMAGEWIDTH*IMAGEHEIGHT];
-
-
-// struct v4l2_queryctrl queryctrl;
-// struct v4l2_querymenu querymenu;
-
-// struct v4l2_control control;
-
 struct buffer
 {
     void * start;
@@ -67,9 +49,6 @@ vector<CameraInfo> CameraV4L2::getCameraList(){
         close(fd);
         ret.push_back(info);
     }
-    
-    // dc1394_camera_free_list(camera_list);
-    // dc1394_free(context);
     
     return ret;
 }
@@ -415,17 +394,6 @@ int CameraV4L2::camera_off()
 }
 
 void CameraV4L2::stopCapture(){
-
-//     dc1394error_t err;
-
-//     err = dc1394_video_set_transmission(cam, DC1394_OFF);
-//     err = dc1394_capture_stop(cam);
-
-// //    // Disable trigger
-// //    err=dc1394_external_trigger_set_power(cam, DC1394_OFF);
-//     if (err!=DC1394_SUCCESS)
-//         cerr << "libdc1394: Could not stop capture!";
-
   
     for(unsigned int i = 0;i < req.count; i++)
     {
@@ -438,21 +406,6 @@ void CameraV4L2::stopCapture(){
 }
 
 int CameraV4L2::flush_buffer(){
-    // This function is courtesy of ofxVideoGrabber/Libdc1394Grabber
-    // bool bufferEmpty = false;
-
-    // while (!bufferEmpty){
-    //     if(dc1394_capture_dequeue(cam, DC1394_CAPTURE_POLICY_POLL, &currentFrame) == DC1394_SUCCESS){
-    //         if(currentFrame != NULL){
-    //             dc1394_capture_enqueue(cam, currentFrame);
-    //         } else {
-    //             bufferEmpty = true;
-    //         }
-    //     } else {
-    //         bufferEmpty = true;
-    //     }
-    // }
-
     for (unsigned int n_buffers = 0; n_buffers < req.count; n_buffers++)
     {
         buf.index = n_buffers;
@@ -536,61 +489,17 @@ int CameraV4L2::yuyv_2_grey(void)
     return 0;
 }
 
-// void CameraV4L2::flushBuffer(){
-//     // This function is courtesy of ofxVideoGrabber/Libdc1394Grabber
-//     bool bufferEmpty = false;
-
-//     while (!bufferEmpty){
-//         if(dc1394_capture_dequeue(cam, DC1394_CAPTURE_POLICY_POLL, &currentFrame) == DC1394_SUCCESS){
-//             if(currentFrame != NULL){
-//                 dc1394_capture_enqueue(cam, currentFrame);
-//             } else {
-//                 bufferEmpty = true;
-//             }
-//         } else {
-//             bufferEmpty = true;
-//         }
-//     }
-// }
-
-
 size_t CameraV4L2::getFrameSizeBytes(){
-    // if (!capturing) {
-    //     cerr << "ERROR: Cannot get frame size before capturing. Call startCapture() before getFrameSizeBytes()." << endl;
-    //     return 0;
-    // }
-
-//    dc1394video_frame_t *frame = NULL;
-//    dc1394error_t err;
-    
-//	// Get frame from ring buffer:
-//    err = dc1394_capture_dequeue(cam, DC1394_CAPTURE_POLICY_WAIT, &frame);
-//    err = dc1394_capture_enqueue(cam, frame);
-    
-//    return frame->image_bytes;
-    // uint64_t total_bytes;
-    // dc1394_format7_get_total_bytes(cam, video_mode, &total_bytes);
 
     return 0;
-    // return total_bytes;
 }
 
 size_t CameraV4L2::getFrameWidth(){
-    // uint32_t _width, _height;
-    // dc1394_get_image_size_from_video_mode(cam, video_mode, &_width, &_height);
-
-    // int _width = static_cast<int>(camera->get(CV_CAP_PROP_FRAME_WIDTH));
-    
     return fmt.fmt.pix.width;
 }
 
 
 size_t CameraV4L2::getFrameHeight(){
-    // uint32_t _width, _height;
-    // dc1394_get_image_size_from_video_mode(cam, video_mode, &_width, &_height);
-
-    // int _height = static_cast<int>(stream1->get(CV_CAP_PROP_FRAME_HEIGHT));
-
     return fmt.fmt.pix.height;
 }
 

@@ -3,7 +3,6 @@
 
 #include "Camera.h"
 #include <opencv2/opencv.hpp>
-// #include <dc1394/dc1394.h>
 
 using namespace std;
 

@@ -4,7 +4,6 @@
 #include "Camera.h"
 #include <linux/videodev2.h>
 #include <opencv2/opencv.hpp>
-// #include <dc1394/dc1394.h>
 
 using namespace std;
 
@@ -35,10 +34,6 @@ class CameraV4L2 : public Camera {
         size_t getFrameWidth();
         size_t getFrameHeight();
     private:
-        // dc1394_t *context;
-        // dc1394camera_t *cam;
-        // dc1394video_mode_t video_mode;
-        // dc1394video_frame_t *currentFrame;
         int fd;
         struct   v4l2_capability   cap;
         struct v4l2_fmtdesc fmtdesc;
